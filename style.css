@@ -246,6 +246,21 @@ line-height: 1.7;
 
 /* Login */
 
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espaço entre ícone e texto */
+}
+
+#userInfo {
+  margin: 0;
+  font-size: 14px;
+  color: #fff; /* branco como os ícones */
+  font-weight: bold;
+}
+
+
 .login-box, .register-box {
   background: var(--black);
   padding: 2rem;

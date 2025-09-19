@@ -18,8 +18,19 @@
         <a href="index.html#about">Sobre</a>
         <a href="menu.html">Menu</a>
         <a href="index.html#address">Avaliações</a>
-        <!-- Botão de logout (escondido por padrão) -->
-        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+
+        <!-- LOGIN + NOME -->
+        <div class="user-box">
+          <a href="login.html" id="loginIcon">
+            <img width="30" height="24" src="https://img.icons8.com/material-rounded/50/ffffff/user.png" alt="user" />
+          </a>
+          <p id="userInfo">LOGIN</p>
+        </div>
+
+        <!-- LOGOUT -->
+        <a href="#" id="logoutBtn" style="display:none;" title="Sair">
+          <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png" alt="exit"/>
+        </a>
       </nav>
     </section>
   </header>
@@ -29,7 +40,7 @@
     <h2 class="title">Faça <span>Login</span></h2>
     <div class="login-box">
       <form id="loginForm">
-        <input type="email" id="loginEmail" placeholder="Seu email" required>
+        <input type="text" id="loginNome" placeholder="Seu nome" required>
         <input type="password" id="loginSenha" placeholder="Sua senha" required>
         <button type="submit" class="btn">Entrar</button>
       </form>

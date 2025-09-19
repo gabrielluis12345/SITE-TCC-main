@@ -1,5 +1,5 @@
 // ===== REGISTRO =====
-document.getElementById("registerForm").addEventListener("submit", function(e) {
+document.getElementById("registerForm")?.addEventListener("submit", function(e) {
   e.preventDefault();
 
   const nome = document.getElementById("regNome").value;
@@ -16,37 +16,52 @@ document.getElementById("registerForm").addEventListener("submit", function(e) {
 });
 
 // ===== LOGIN =====
-document.getElementById("loginForm").addEventListener("submit", function(e) {
+document.getElementById("loginForm")?.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const email = document.getElementById("loginEmail").value;
+  const nome = document.getElementById("loginNome").value;
   const senha = document.getElementById("loginSenha").value;
   const msg = document.getElementById("loginMsg");
 
   const savedUser = JSON.parse(localStorage.getItem("user"));
 
-  if (savedUser && email === savedUser.email && senha === savedUser.senha) {
+  if (savedUser && nome === savedUser.nome && senha === savedUser.senha) {
     localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("currentUser", savedUser.nome); // salva o nome do usuário logado
+
     msg.style.color = "green";
     msg.textContent = "✅ Login realizado com sucesso!";
     setTimeout(() => {
-      window.location.href = "menu.html";
+      window.location.href = "menu.html"; // redireciona
     }, 1000);
   } else {
     msg.style.color = "red";
-    msg.textContent = "❌ Email ou senha incorretos!";
+    msg.textContent = "❌ Nome ou senha incorretos!";
   }
 });
 
-// ===== LOGOUT =====
+// ===== MOSTRAR USUÁRIO LOGADO + LOGOUT (funciona em qualquer página) =====
 const logoutBtn = document.getElementById("logoutBtn");
-if (localStorage.getItem("isLoggedIn") === "true") {
-  logoutBtn.style.display = "inline-block";
+const userInfo = document.getElementById("userInfo");
+
+if (userInfo) {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const currentUser = localStorage.getItem("currentUser");
+
+  if (isLoggedIn && currentUser) {
+    userInfo.textContent = currentUser; // mostra o nome do usuário
+    if (logoutBtn) logoutBtn.style.display = "inline-block"; // mostra botão logout
+  } else {
+    userInfo.textContent = "LOGIN"; // mostra LOGIN se não estiver logado
+    if (logoutBtn) logoutBtn.style.display = "none"; // esconde logout
+  }
 }
 
-logoutBtn.addEventListener("click", function(e) {
+// ===== LOGOUT =====
+logoutBtn?.addEventListener("click", function(e) {
   e.preventDefault();
   localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("currentUser");
   alert("Você saiu da sua conta.");
   window.location.href = "index.html";
 });

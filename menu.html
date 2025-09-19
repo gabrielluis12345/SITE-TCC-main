@@ -1,48 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Ponto do Café</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <title>Produtos - Ponto do Café</title>
 </head>
-
 <body>
-  <!-- HEADER -->
   <header class="header">
     <section>
-      <a href="index.html" class="logo ">
-        <img src="img/logo.png" height="100px" alt="logo">
+      <a href="index.html" class="logo">
+        <img src="img/logo.png" height="80px" alt="logo">
       </a>
 
       <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">Sobre</a>
+        <a href="menu.html">Menu</a>
+        <a href="index.html#address">Avaliações</a>
+
+       <!-- LOGIN + NOME -->
+        <div class="user-box">
+          <a href="login.html" id="loginIcon">
+            <img width="30" height="24" src="https://img.icons8.com/material-rounded/50/ffffff/user.png" alt="user" />
+          </a>
+          <p id="userInfo">LOGIN</p>
+        </div>
+
+        <!-- LOGOUT -->
+        <a href="#" id="logoutBtn" style="display:none;" title="Sair">
+          <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png" alt="exit"/>
+        </a>
       </nav>
-
-      <div class="icons">
-        <!-- LOGO LUPA -->
-        <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/ffffff/search--v1.png"
-          alt="search--v1" />
-
-        <!-- LOGO CARRINHO -->
-        <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/ffffff/shopping-cart.png"
-          alt="shopping-cart" />
-
-        <!-- LOGO Login -->
-        <a href="login.html"><img width="30" height="24"
-            src="https://img.icons8.com/material-rounded/50/ffffff/user.png" alt="user" /></a>
-      </div>
     </section>
   </header>
 
-  <!-- SEÇÃO DE PRODUTOS -->
+  <main>
+    <!-- SEÇÃO DE PRODUTOS -->
   <section class="menu">
     <h2 class="title">Nosso <span>Menu</span></h2>
 
@@ -104,7 +98,7 @@
     </div>
   </section>
 
-   <!-- POPUP -->
+  <!-- POPUP -->
   <div id="login-popup" class="popup">
     <div class="popup-content">
       <span class="close">&times;</span>
@@ -113,12 +107,11 @@
       <a href="login.html" class="btn">Fazer Login</a>
     </div>
   </div>
-
+  <script src="login.js"></script>
   <script src="car-add.js"></script>
   <script src="logout.js"></script>
-
-  <!-- FOOTER -->
   
-</body>
 
+  </main>
+</body>
 </html>
