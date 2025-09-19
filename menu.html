@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <title>Produtos - Ponto do Café</title>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <section>
+      <a href="index.html" class="logo ">
+        <img src="img/logo.png" height="100px" alt="logo">
+      </a>
+
+      <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </nav>
+
+      <div class="icons">
+        <!-- LOGO LUPA -->
+        <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/ffffff/search--v1.png"
+          alt="search--v1" />
+
+        <!-- LOGO CARRINHO -->
+        <img width="30" height="30" src="https://img.icons8.com/material-sharp/24/ffffff/shopping-cart.png"
+          alt="shopping-cart" />
+
+        <!-- LOGO Login -->
+        <a href="login.html"><img width="30" height="24"
+            src="https://img.icons8.com/material-rounded/50/ffffff/user.png" alt="user" /></a>
+      </div>
+    </section>
+  </header>
+
+  <!-- SEÇÃO DE PRODUTOS -->
+  <section class="menu">
+    <h2 class="title">Nosso <span>Menu</span></h2>
+
+    <div class="box-container">
+      <div class="box">
+        <img src="img/menu-1.png" alt="item-1">
+        <h3>Café Expresso</h3>
+        <div class="price">R$ 5,99 <span>R$10,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/menu-3.png" alt="item-2">
+        <h3>Cappuccino</h3>
+        <div class="price">R$ 9,99 <span>R$16,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/menu-2.png" alt="item-3">
+        <h3>Café com Leite</h3>
+        <div class="price">R$ 5,99 <span>R$8,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/croasan.png.png" alt="item-4">
+        <h3>Croissant</h3>
+        <div class="price">R$ 6,99 <span>R$11,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/bolo.png.png" alt="item-5">
+        <h3>Bolo de Cenoura</h3>
+        <div class="price">R$ 9,99 <span>R$12,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/pao de queijo.png.png" alt="item-6">
+        <h3>Pão de Queijo</h3>
+        <div class="price">R$ 3,99 <span>R$8,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/suco natural.png" alt="item-6">
+        <h3>Suco Natural</h3>
+        <div class="price">R$ 6,99 <span>R$9,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/cha gelado.png.png" alt="item-6">
+        <h3>Chá Gelado</h3>
+        <div class="price">R$ 5,99 <span>R$8,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+      <div class="box">
+        <img src="img/latte.png.png" alt="item-6">
+        <h3>Latte</h3>
+        <div class="price">R$ 7,99 <span>R$13,99</span></div>
+        <a href="#" class="btn add-to-cart">Adicionar ao Carrinho</a>
+      </div>
+    </div>
+  </section>
+
+   <!-- POPUP -->
+  <div id="login-popup" class="popup">
+    <div class="popup-content">
+      <span class="close">&times;</span>
+      <h2>⚠️ Atenção</h2>
+      <p>Você precisa estar logado para comprar.</p>
+      <a href="login.html" class="btn">Fazer Login</a>
+    </div>
+  </div>
+
+  <script src="car-add.js"></script>
+  <script src="logout.js"></script>
+
+  <!-- FOOTER -->
+  
+</body>
+
+</html>
