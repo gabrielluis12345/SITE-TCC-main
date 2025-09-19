@@ -32,7 +32,7 @@ document.getElementById("loginForm")?.addEventListener("submit", function(e) {
     msg.style.color = "green";
     msg.textContent = "✅ Login realizado com sucesso!";
     setTimeout(() => {
-      window.location.href = "menu.html"; // redireciona
+      window.location.href = "index.html"; // redireciona
     }, 1000);
   } else {
     msg.style.color = "red";
@@ -49,10 +49,10 @@ if (userInfo) {
   const currentUser = localStorage.getItem("currentUser");
 
   if (isLoggedIn && currentUser) {
-    userInfo.textContent = currentUser; // mostra o nome do usuário
+    userInfo.textContent = `Olá, ${currentUser}`; // mostra saudação + nome
     if (logoutBtn) logoutBtn.style.display = "inline-block"; // mostra botão logout
   } else {
-    userInfo.textContent = "LOGIN"; // mostra LOGIN se não estiver logado
+    userInfo.textContent = "Entrar"; // mostra LOGIN se não estiver logado
     if (logoutBtn) logoutBtn.style.display = "none"; // esconde logout
   }
 }
