@@ -403,6 +403,23 @@ line-height: 1.7;
     margin-top: 2rem;
   }
 
+  /* ===== BOTOES DO CARRINHO ===== */
+
+  .btn-small{
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #d3ad7f;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 15px;
+  }
+
+  .btn-small:hover{
+    background-color: #b68a5d;
+  }
+
   .limpar {
     margin-top: 2rem;
     padding: 1rem 2rem;
@@ -415,6 +432,21 @@ line-height: 1.7;
   }
 
   .limpar:hover {
+    background-color: #b68a5d;
+  }
+
+  .pg {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background-color: #d3ad7f;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    border-radius: 5px;
+  }
+
+  .pg:hover{
     background-color: #b68a5d;
   }
 

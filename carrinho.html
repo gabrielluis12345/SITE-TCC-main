@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <title>Carrinho</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css" />
- 
+
 </head>
+
 <body>
 
   <!-- HEADER -->
@@ -24,16 +26,16 @@
 
         <div class="user-box">
           <a href="login.html" id="loginIcon">
-            <img width="24" src="https://img.icons8.com/material-rounded/24/ffffff/user.png"/>
+            <img width="24" src="https://img.icons8.com/material-rounded/24/ffffff/user.png" />
           </a>
           <p id="userInfo"></p>
 
           <a href="#" id="logoutBtn" style="display:none;" title="Sair">
-            <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png" alt="exit"/>
+            <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png" alt="exit" />
           </a>
 
           <a href="carrinho.html" title="Carrinho">
-            <img width="24" src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png"/>
+            <img width="24" src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" />
           </a>
         </div>
       </nav>
@@ -54,6 +56,17 @@
       </div>
     </section>
   </main>
+
+  <!-- POPUP carrinho vazio -->
+ <div id="carrinho-popup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <h2>⚠️ Atenção</h2>
+    <p>Seu carrinho está vazio. Adicione um item antes de prosseguir.</p>
+    <a href="menu.html" class="btn">Ver Menu</a>
+  </div>
+ </div>
+
 
   <script>
     const container = document.getElementById("carrinhoContainer");
@@ -133,9 +146,31 @@
     }
 
     function fazerPagamento() {
+      if (carrinho.length === 0) {
+        // abre o popup
+        document.getElementById("carrinho-popup").style.display = "flex";
+        return;
+      }
+
       alert("🔒 Redirecionando para pagamento...");
       window.location.href = "checkout.html";
     }
+
+    // Fechar popup no "X"
+    document.querySelectorAll(".popup .close").forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.closest(".popup").style.display = "none";
+      });
+    });
+
+    // Fechar se clicar fora do conteúdo
+    window.addEventListener("click", (e) => {
+      const popup = document.getElementById("carrinho-popup");
+      if (e.target === popup) {
+        popup.style.display = "none";
+      }
+    });
+
 
     function mostrarNomeUsuario() {
       const nome = localStorage.getItem("currentUser");
@@ -155,4 +190,5 @@
   <script src="logout.js"></script>
 
 </body>
+
 </html>
