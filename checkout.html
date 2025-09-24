@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <!-- CSS INTEGRADO -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0e0e10;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #19191f;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    strong{
+        color: white;
+    }
+    span{
+        color: #d3ad7f;
+    }
+    #resumo p{
+        color: rgba(255, 255, 255, 0.452);
+    }
+
+    h2 {
+        color: white;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item p {
+      margin: 5px 0;
+      color: white;
+    }
+
+    .total {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .pagamento {
+      color: white;
+      margin-top: 30px;
+    }
+
+    .pagamento label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .radio-group input {
+      margin-right: 5px;
+    }
+
+    .qrcode,
+    .cartao {
+      display: none;
+    }
+
+    .qrcode img {
+      max-width: 300px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .cartao input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #28a745;
+      color: white;
+      font-size: 18px;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #218838;
+    }
+  </style>
+
+   <!-- FIM DO CSS  -->
+
+</head>
+<body>
+  <div class="container">
+    <h2>RESUMO DO <span>PEDIDO</span></h2>
+    <div id="resumo"></div>
+    <div class="total" id="total"></div>
+
+    <div class="pagamento">
+      <label>Escolha o método de pagamento:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="metodo" value="pix" checked onchange="trocarMetodo()"> Pix</label>
+        <label><input type="radio" name="metodo" value="cartao" onchange="trocarMetodo()"> Cartão de crédito</label>
+      </div>
+
+      <div class="qrcode" id="qrcode">
+        <p style="text-align:center">Escaneie o QR Code para pagar com Pix:</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=PagamentoPixExemplo&size=200x200" alt="QR Code Pix">
+        <p style="text-align:center; font-size: 14px;">(QR Code gerado apenas como exemplo)</p>
+      </div>
+
+      <div class="cartao" id="cartao">
+        <input type="text" placeholder="Número do cartão" maxlength="19" />
+        <input type="text" placeholder="Nome no cartão" />
+        <input type="text" placeholder="Validade (MM/AA)" maxlength="5" />
+        <input type="text" placeholder="CVV" maxlength="4" />
+      </div>
+    </div>
+
+    <button class="btn" onclick="finalizarPagamento()">Finalizar Pagamento</button>
+  </div>
+
+ <!-- JS -->
+
+  <script>
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const resumo = document.getElementById("resumo");
+    const totalEl = document.getElementById("total");
+
+    let total = 0;
+
+    if (carrinho.length === 0) {
+      resumo.innerHTML = "<p>Seu carrinho está vazio.</p>";
+      document.querySelector(".btn").disabled = true;
+    } else {
+        carrinho.forEach(produto => {
+  const subtotal = produto.preco * produto.quantidade;
+  total += subtotal;
+
+  resumo.innerHTML += `
+    <div class="item" style="display: flex; gap: 15px; align-items: center;">
+      <img src="${produto.imagem}" alt="${produto.nome}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; border: 1px solid #ccc;">
+      <div>
+        <p><strong>${produto.nome}</strong></p>
+        <p>Quantidade: ${produto.quantidade}</p>
+        <p>Subtotal: R$ ${subtotal.toFixed(2).replace(".", ",")}</p>
+      </div>
+    </div>
+  `;
+});
+
+
+      totalEl.innerText = `Total: R$ ${total.toFixed(2).replace(".", ",")}`;
+    }
+
+    function trocarMetodo() {
+      const metodo = document.querySelector('input[name="metodo"]:checked').value;
+      const qr = document.getElementById("qrcode");
+      const cartao = document.getElementById("cartao");
+
+      if (metodo === "pix") {
+        qr.style.display = "block";
+        cartao.style.display = "none";
+      } else {
+        qr.style.display = "none";
+        cartao.style.display = "block";
+      }
+    }
+
+    function finalizarPagamento() {
+      const metodo = document.querySelector('input[name="metodo"]:checked').value;
+
+      if (metodo === "cartao") {
+        const inputs = document.querySelectorAll("#cartao input");
+        for (let input of inputs) {
+          if (!input.value.trim()) {
+            alert("Por favor, preencha todos os dados do cartão.");
+            return;
+          }
+        }
+      }
+
+      alert("💳 Pagamento realizado com sucesso!");
+
+      // Limpa o carrinho e redireciona
+      localStorage.removeItem("carrinho");
+      window.location.href = "index.html";
+    }
+
+    // Mostrar o QR code por padrão
+    trocarMetodo();
+  </script>
+
+   <!-- FIM DO JS -->
+</body>
+</html>

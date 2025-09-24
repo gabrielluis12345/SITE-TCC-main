@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrinho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+ 
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <section>
+      <a href="index.html" class="logo">
+        <img src="img/logo.png" height="60px" alt="logo">
+      </a>
+
+      <nav class="navbar">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">Sobre</a>
+        <a href="menu.html">Menu</a>
+        <a href="index.html#address">Avaliações</a>
+
+        <div class="user-box">
+          <a href="login.html" id="loginIcon">
+            <img width="24" src="https://img.icons8.com/material-rounded/24/ffffff/user.png"/>
+          </a>
+          <p id="userInfo"></p>
+
+          <a href="#" id="logoutBtn" style="display:none;" title="Sair">
+            <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/ffffff/exit.png" alt="exit"/>
+          </a>
+
+          <a href="carrinho.html" title="Carrinho">
+            <img width="24" src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png"/>
+          </a>
+        </div>
+      </nav>
+    </section>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main style="padding-top: 150px;">
+    <section>
+      <h2 class="title">🛒 Carrinho de <span>Compras</span></h2>
+
+      <div id="carrinhoContainer"></div>
+      <div id="totalContainer" class="total"></div>
+
+      <div class="acoes" style="margin-top: 2rem; display: flex; gap: 1rem;">
+        <button class="limpar btn" onclick="limparCarrinho()">🗑️ Limpar Carrinho</button>
+        <button class="pg btn" onclick="fazerPagamento()">💳 Fazer Pagamento</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const container = document.getElementById("carrinhoContainer");
+    const totalContainer = document.getElementById("totalContainer");
+    const userInfo = document.getElementById("userInfo");
+
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    function salvarCarrinho() {
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    }
+
+    function mostrarCarrinho() {
+      container.innerHTML = "";
+      let total = 0;
+
+      if (carrinho.length === 0) {
+        container.innerHTML = "<p class='vazio'>Seu carrinho está vazio.</p>";
+        totalContainer.textContent = "";
+        return;
+      }
+
+      carrinho.forEach((produto, index) => {
+        const div = document.createElement("div");
+        div.classList.add("produto");
+
+        div.innerHTML = `
+          <img src="${produto.imagem}" alt="${produto.nome}" />
+          <div class="produto-info">
+            <h3>${produto.nome}</h3>
+            <p>Preço unitário: R$ ${produto.preco.toFixed(2).replace(".", ",")}</p>
+            <p>Quantidade: 
+              <button class="btn-small" onclick="alterarQuantidade(${index}, -1)">-</button>
+              ${produto.quantidade}
+              <button class="btn-small" onclick="alterarQuantidade(${index}, 1)">+</button>
+            </p>
+            <div class="acoes-produto">
+              <button class="btn-small" onclick="removerProduto(${index})">❌ Remover</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(div);
+        total += produto.preco * produto.quantidade;
+      });
+
+      totalContainer.textContent = `💰 Total: R$ ${total.toFixed(2).replace(".", ",")}`;
+    }
+
+    function alterarQuantidade(index, delta) {
+      carrinho[index].quantidade += delta;
+
+      if (carrinho[index].quantidade < 1) {
+        if (confirm("Deseja remover este item do carrinho?")) {
+          carrinho.splice(index, 1);
+        } else {
+          carrinho[index].quantidade = 1;
+        }
+      }
+
+      salvarCarrinho();
+      mostrarCarrinho();
+    }
+
+    function removerProduto(index) {
+      carrinho.splice(index, 1);
+      salvarCarrinho();
+      mostrarCarrinho();
+    }
+
+    function limparCarrinho() {
+      if (confirm("Tem certeza que deseja esvaziar o carrinho?")) {
+        localStorage.removeItem("carrinho");
+        carrinho = [];
+        mostrarCarrinho();
+      }
+    }
+
+    function fazerPagamento() {
+      alert("🔒 Redirecionando para pagamento...");
+      window.location.href = "checkout.html";
+    }
+
+    function mostrarNomeUsuario() {
+      const nome = localStorage.getItem("currentUser");
+      if (nome) {
+        userInfo.textContent = `Olá, ${nome}`;
+      } else {
+        userInfo.textContent = "Entrar";
+      }
+    }
+
+    mostrarNomeUsuario();
+    mostrarCarrinho();
+  </script>
+
+  <script src="login.js"></script>
+  <script src="car-add.js"></script>
+  <script src="logout.js"></script>
+
+</body>
+</html>
